@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results | CGL Predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header-brand">
+            <h1><i class="fas fa-chart-line"></i> Prediction Results</h1>
+        </header>
+
+        <!-- Main Parameters -->
+        <section class="result-section">
+            <h2><i class="fas fa-cogs"></i> Process Parameters</h2>
+            <table class="results-table">
+                {% for key, value in main.items() %}
+                    {% if 'NOF' not in key and key != 'Speed' %}
+                    <tr>
+                        <td>{{ key }}</td>
+                        <td>{{ value }}
+                            {% if key in ['JCF', 'JCF1', 'JCF2', 'JCF3', 'JCF4', 'JCF5',
+                                          'JCFEN STRIP', 'JCFEX STRIP', 'NOF STRIP', 'RTF STRIP',
+                                          'Pot Temperature'] %}
+                            °C
+                            {% elif key == 'Pot Tension' %}
+                            N
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endif %}
+                {% endfor %}
+            </table>
+        </section>
+
+        <!-- Firing Prediction -->
+        <section class="result-section">
+            <h2><i class="fas fa-fire"></i> Firing Prediction</h2>
+            <p class="firing-result">{{ firing }}%</p>
+        </section>
+
+        <!-- NOF Zone Temperatures -->
+        <section class="result-section">
+            <h2><i class="fas fa-thermometer-half"></i> NOF Zone Temperatures</h2>
+            <table class="results-table">
+                {% for i in range(1, 6) %}
+                <tr><td>NOF{{ i }} Temperature</td><td>{{ main['NOF' ~ i] }} °C</td></tr> <!-- Fixed unit -->
+                {% endfor %}
+                <!-- Line Speed -->
+                <tr><td>Line Speed</td><td>{{ main['Speed'] }} m/min</td></tr> <!-- Speed retains m/min -->
+            </table>
+        </section>
+
+        <!-- TPH Calculation -->
+        <section class="result-section">
+            <h2><i class="fas fa-weight-hanging"></i> Production Rate (TPH)</h2>
+            <p class="tph-result">{{ tph }} Tons/hour</p> <!-- Tons/hour added -->
+        </section>
+
+        <!-- Back Button -->
+        <a href="/" class="back-button"><i class="fas fa-arrow-left"></i> New Calculation</a>
+    </div>
+</body>
+</html>

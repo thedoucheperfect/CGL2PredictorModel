@@ -1,0 +1,13 @@
+#Ignore virtual environments
+venv/
+.env/
+*.pyc
+__pycache__/
+#ignore system files
+.DS_Store
+Thumbs.db
+#ignore logs and temporary files
+*.log
+*.tmp
+#ignore dependency files
+*.lock
