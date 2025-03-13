@@ -5,21 +5,21 @@ import pandas as pd
 class CGLPredictor:
     def __init__(self):
         # Load models
-        self.rfr_main = joblib.load('models/rfr_main.joblib')
-        self.xgb_main = joblib.load('models/xgb_main.joblib')
-        self.scaler_main = joblib.load('models/scaler.joblib')
+        self.rfr_main = joblib.load('Models/rfr_main.joblib')
+        self.xgb_main = joblib.load('Models/xgb_main.joblib')
+        self.scaler_main = joblib.load('Models/scaler.joblib')
 
         # Load firing models
-        self.rfr_firing = joblib.load('models/rfr_firing.joblib')
-        self.xgb_firing = joblib.load('models/xgb_firing.joblib')
-        self.scaler_firing = joblib.load('models/scaler_firing.joblib')
+        self.rfr_firing = joblib.load('Models/rfr_firing.joblib')
+        self.xgb_firing = joblib.load('Models/xgb_firing.joblib')
+        self.scaler_firing = joblib.load('Models/scaler_firing.joblib')
 
         # Load R² scores and maintain key order
-        with open('models/main_r2_scores.json') as f:
+        with open('Models/main_r2_scores.json') as f:
             self.main_scores = json.load(f)
             self.output_order = list(self.main_scores['RandomForest'].keys())
 
-        with open('models/firing_r2_scores.json') as f:
+        with open('Models/firing_r2_scores.json') as f:
             self.firing_scores = json.load(f)
 
     def predict_main(self, input_data):
