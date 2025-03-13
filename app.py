@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, session
 from FinalModel import CGLPredictor
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key'  # Required for using session
+app.secret_key = '?87Rc:"m4C_]R>b8hL;f+nEFZ=o$6r!gcU'  # Required for using session
 predictor = CGLPredictor()
 
 @app.route('/')
